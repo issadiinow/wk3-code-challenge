@@ -101,3 +101,27 @@ body {
     margin: 15px 0;
     color: #666;
 }
+
+#buy-ticket {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#buy-ticket:hover {
+    background-color: #45a049;
+}
+
+#buy-ticket:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#buy-ticket.sold-out {
+    background-color: #ff6347;
+}
