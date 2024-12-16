@@ -132,3 +132,11 @@ function buyTicket() {
         .catch(error => console.error('Error buying ticket:', error));
 }
 
+// Event Listeners
+buyTicketBtn.addEventListener('click', buyTicket);
+
+// Initialize App
+document.addEventListener('DOMContentLoaded', () => {
+    populateMoviesList();
+});
+
