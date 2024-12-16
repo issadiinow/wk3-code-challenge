@@ -33,3 +33,38 @@ body {
     list-style-type: none;
     padding: 0;
 }
+.movie-card {
+    display: inline-block;
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-card img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.movie-card .title {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.movie-card .available-tickets {
+    margin-top: 5px;
+    color: #888;
+    font-size: 14px;
+}
