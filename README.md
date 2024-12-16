@@ -1,170 +1,82 @@
-# Flatdango
+# Flatdango Movie Ticket App
+
+## Overview
+Flatdango is a simple web application that allows users to view movie details and purchase tickets for various films.
 
 ## Features
+- Browse a list of movies
+- View detailed information about each movie
+- Purchase tickets for available shows
+- Real-time ticket availability updates
 
-- View the first movie's details when the page loads, including:
-  - Poster
-  - Title
-  - Runtime
-  - Showtime
-  - Available tickets (calculated from capacity minus tickets sold)
-- Browse a menu of all available movies.
-- Buy tickets for a movie, reducing the number of available tickets.
-- Sold-out movies are clearly indicated, and ticket purchases are disabled for them.
+## Prerequisites
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
 
----
+## Installation
 
-## Requirements
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/flatdango-movie-app.git
+cd flatdango-movie-app
+```
 
-To run this application, ensure you have the following installed on your system:
+2. Install dependencies:
+```bash
+npm init -y
+npm install json-server live-server concurrently
+```
+3. Set Up the Database
+Create a `db.json` file in the project directory and add the following data structure from thhe  link provided:
+[db.json](https://docs.google.com/document/d/1KKqnHX4woJXQD1DSARTOcFD66uniLy0qwJFoHmmQDbA/edit?tab=t.0)
 
-1. **Node.js** (Download from [Node.js](https://nodejs.org/))
-2. **JSON Server** (Install globally via npm: `npm install -g json-server`)
-3. A modern web browser (e.g., Chrome, Firefox, or Edge).
+## Running the Application
 
----
+### Option 1: Concurrent Server Startup
+To start both the JSON server and live server simultaneously, add the following scripts to your `package.json`:
 
-## Setup Instructions
+```json
+"scripts": {
+  "start": "concurrently \"json-server --watch db.json\" \"live-server\""
+}
+```
 
-Follow these steps to set up and run the application:
+Then run:
+```bash
+npm start
+```
 
-### Step 1: Clone the Repository
+### Option 2: Manual Startup
+If you prefer to start servers separately:
 
-1. Open your terminal and run the following command to clone the repository:
-   ```bash
-   git clone https://github.com/<your-username>/<your-repo-name>.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd <your-repo-name>
-   ```
+1. Start JSON Server (Backend):
+```bash
+npx json-server --watch db.json
+```
+- This will start the JSON server on `http://localhost:3000`
+- Serves the movie data from `db.json`
 
-### Step 2: Install JSON Server
+2. Start Live Server (Frontend):
+```bash
+npx live-server
+```
+- This will start the frontend on `http://localhost:8080`
 
-1. Ensure that [Node.js](https://nodejs.org/) is installed on your system.
-2. Install `json-server` globally:
-   ```bash
-   npm install -g json-server
-   ```
-
-### Step 3: Set Up the Database
-
-1. Create a `db.json` file in the project directory and add the following data structure:
-   ```json
-   {
-     "films": [
-       {
-         "id": "1",
-         "title": "The Giant Gila Monster",
-         "runtime": "108",
-         "capacity": 30,
-         "showtime": "04:00PM",
-         "tickets_sold": 27,
-         "description": "A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.",
-         "poster": "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
-       },
-       {
-         "id": "2",
-         "title": "Manos: The Hands Of Fate",
-         "runtime": "118",
-         "capacity": 50,
-         "showtime": "06:45PM",
-         "tickets_sold": 44,
-         "description": "A family gets lost on the road and stumbles upon a hidden, underground, devil-worshiping cult led by the fearsome Master and his servant Torgo.",
-         "poster": "https://www.gstatic.com/tv/thumb/v22vodart/47781/p47781_v_v8_ac.jpg"
-       },
-       {
-         "id": "3",
-         "title": "Time Chasers",
-         "runtime": "93",
-         "capacity": 50,
-         "showtime": "09:30PM",
-         "tickets_sold": 31,
-         "description": "An inventor comes up with a time machine, but must prevent its abuse at the hands of an evil C.E.O.",
-         "poster": "https://www.gstatic.com/tv/thumb/v22vodart/23342/p23342_v_v8_ab.jpg"
-       },
-       {
-         "id": "4",
-         "title": "The Touch Of Satan",
-         "runtime": "101",
-         "capacity": 40,
-         "showtime": "09:00PM",
-         "tickets_sold": 31,
-         "description": "A young man meets a farm girl who is actually a witch.",
-         "poster": "https://www.gstatic.com/tv/thumb/v22vodart/43468/p43468_v_v8_aa.jpg"
-       },
-       {
-         "id": "5",
-         "title": "Santa Claus Conquers The Martians",
-         "runtime": "96",
-         "capacity": 50,
-         "showtime": "03:30PM",
-         "tickets_sold": 45,
-         "description": "The Martians kidnap Santa Claus because there is nobody on Mars to give their children presents.",
-         "poster": "https://www.gstatic.com/tv/thumb/v22vodart/4232/p4232_v_v8_aa.jpg"
-       }
-     ]
-   }
-   ```
-   > Note: Replace the `...` with additional movie objects as needed.
-
-2. Save this file in the root of your project directory.
-
-### Step 4: Start the JSON Server
-
-1. Start the backend server by running:
-   ```bash
-   json-server --watch db.json
-   ```
-2. The server will run on `http://localhost:3000` by default.
-
-### Step 5: Run the Application
-
-1. Open the `index.html` file in your web browser. You can either:
-   - Double-click the file to open it in your default browser, or
-   - Serve it locally with a tool like [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) in Visual Studio Code for better performance.
-
-2. The application will load with the details of the first movie displayed and the list of movies on the left.
-
-### Step 6: Interact with the Application
-
-1. Browse the available movies and their details.
-2. Purchase tickets using the "Buy Ticket" button and see the available ticket count decrease dynamically.
-3. If tickets sell out, the button will display "Sold Out" and prevent further purchases.
-
----
+## Application Structure
+- `index.html`: Main HTML page
+- `index.js`: JavaScript logic for fetching and displaying movies
+- `style.css`: Styling for the application
+- `db.json`: JSON database containing movie information
 
 ## How to Use
+1. The app loads with the first movie's details displayed
+2. Click on movie cards in the left panel to view their details
+3. Click "Buy Ticket" to purchase a ticket
+4. Tickets are limited and will show "Sold Out" when unavailable
 
-1. Load the application in your browser.
-2. Browse the movie list on the left.
-3. View details of the first movie or click on any movie to view its details.
-4. Buy tickets and watch the available ticket count decrease.
-5. Sold-out movies are automatically marked and disabled for further purchases.
-
----
-
-## Technologies Used
-
-- **HTML**: For structuring the webpage.
-- **CSS**: For styling the application.
-- **JavaScript**: For dynamic DOM manipulation and event handling.
-- **JSON Server**: For simulating a backend server.
-
----
-
-## Project Structure
-
-The project directory is structured as follows:
-
-```
-<project-root>/
-├── index.html       # Main HTML file
-├── styles.css       # Stylesheet for the app
-├── script.js        # JavaScript file for app functionality
-├── db.json          # JSON file for simulating backend data
-└── README.md        # Project documentation (this file)
-```
-
----
+## Troubleshooting
+- Ensure both servers are running
+- Check browser console for any error messages
+- Verify that `db.json` is in the correct location
 
