@@ -99,3 +99,36 @@ function displayMovieDetails(movie) {
     buyTicketBtn.dataset.movieId = movie.id;
 }
 
+// Buy ticket functionality
+function buyTicket() {
+    const movieId = buyTicketBtn.dataset.movieId;
+
+    fetch(`${BASE_URL}/films/${movieId}`)
+        .then(response => response.json())
+        .then(movie => {
+            if (movie.capacity > movie.tickets_sold) {
+                // Prepare the updated ticket data
+                const updatedTicketsSold = movie.tickets_sold + 1;
+                const updatedMovie = { ...movie, tickets_sold: updatedTicketsSold };
+
+                // Update the server-side data
+                return fetch(`${BASE_URL}/films/${movieId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedMovie)
+                })
+                .then(response => response.json())
+                .then(() => {
+                    // Refresh the movie details to reflect the updated tickets
+                    displayMovieDetails(updatedMovie);
+
+                    // Update the movies list to reflect the new ticket count
+                    populateMoviesList();
+                });
+            }
+        })
+        .catch(error => console.error('Error buying ticket:', error));
+}
+
