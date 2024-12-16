@@ -80,3 +80,5 @@ npx live-server
 - Check browser console for any error messages
 - Verify that `db.json` is in the correct location
 
+## Bugs 
+- Whenever you run the application and select the a movie from the list and you try to buy multiple tickets it returns you to the first movie poster
