@@ -71,6 +71,7 @@ function populateMoviesList() {
         })
         .catch(error => console.error('Error fetching movies:', error));
 }
+
 // Display movie details
 function displayMovieDetails(movie) {
     const ticketsAvailable = movie.capacity - movie.tickets_sold;
@@ -139,4 +140,3 @@ buyTicketBtn.addEventListener('click', buyTicket);
 document.addEventListener('DOMContentLoaded', () => {
     populateMoviesList();
 });
-

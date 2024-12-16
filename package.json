@@ -1,0 +1,11 @@
+
+{
+  "name": "movie-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"json-server --watch db.json --port 3000\" \"live-server --port=5500\""
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
